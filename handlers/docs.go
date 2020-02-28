@@ -1,19 +1,26 @@
-// Package classification of Product API
+// Package classification of Product API.
 //
 // Documentation for Product API
+// the purpose of this application is to provide an application
+// that is using plain go code to define an API
 //
-//		Schemes: http
-//		BasePath: /
-//		Version: 1.0.0
+// This should demonstrate all the possible comment annotations
+// that are available to turn go code into a fully compliant swagger 2.0 spec
 //
-//		Consumes:
-//		- application/json
+// Terms Of Service:
 //
-//		Produces:
-//		- application/json
+//	Schemes: http
+// 	Host: localhost
+//	BasePath: /
+//	Version: 1.0.0
+//
+//	Consumes:
+//	- application/json
+//
+//	Produces:
+//	- application/json
 //
 // swagger:meta
-
 package handlers
 
 import "github.com/sanprasirt/product-api/data"
@@ -68,7 +75,7 @@ type productParamsWrapper struct {
 	Body data.Product
 }
 
-// swagger:parameters updateProduct
+// swagger:parameters listSingleProduct deleteProduct
 type productIDParamsWrapper struct {
 	// The id of the product for which the operation relates
 	// in: path

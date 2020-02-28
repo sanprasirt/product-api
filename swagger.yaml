@@ -1,12 +1,17 @@
+basePath: /
+consumes:
+- application/json
 definitions:
   GenericError:
-    description: GenericError is a generic error message returned by a server
+    description: GenericError GenericError is a generic error message returned by
+      a server
     properties:
       message:
+        description: message
         type: string
         x-go-name: Message
     type: object
-    x-go-package: github.com/sanprasirt/product-api/handlers
+    x-go-package: github.com/sanprasirt/product-api/client/models
   Product:
     description: Product defines the structure for an API product
     properties:
@@ -44,16 +49,28 @@ definitions:
     type: object
     x-go-package: github.com/sanprasirt/product-api/data
   ValidationError:
-    description: ValidationError is a collection of validation error messages
+    description: ValidationError ValidationError is a collection of validation error
+      messages
     properties:
       messages:
+        description: messages
         items:
           type: string
         type: array
         x-go-name: Messages
     type: object
-    x-go-package: github.com/sanprasirt/product-api/handlers
-info: {}
+    x-go-package: github.com/sanprasirt/product-api/client/models
+host: localhost
+info:
+  description: |-
+    Documentation for Product API
+    the purpose of this application is to provide an application
+    that is using plain go code to define an API
+
+    This should demonstrate all the possible comment annotations
+    that are available to turn go code into a fully compliant swagger 2.0 spec
+  title: of Product API.
+  version: 1.0.0
 paths:
   /products:
     get:
@@ -97,13 +114,6 @@ paths:
         required: true
         schema:
           $ref: '#/definitions/Product'
-      - description: The id of the product for which the operation relates
-        format: int64
-        in: path
-        name: id
-        required: true
-        type: integer
-        x-go-name: ID
       responses:
         "201":
           $ref: '#/responses/noContentResponse'
@@ -117,6 +127,14 @@ paths:
     delete:
       description: Update a products details
       operationId: deleteProduct
+      parameters:
+      - description: The id of the product for which the operation relates
+        format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+        x-go-name: ID
       responses:
         "201":
           $ref: '#/responses/noContentResponse'
@@ -128,7 +146,15 @@ paths:
       - products
     get:
       description: Return a list of products from the database
-      operationId: listSingle
+      operationId: listSingleProduct
+      parameters:
+      - description: The id of the product for which the operation relates
+        format: int64
+        in: path
+        name: id
+        required: true
+        type: integer
+        x-go-name: ID
       responses:
         "200":
           $ref: '#/responses/productResponse'
@@ -136,6 +162,8 @@ paths:
           $ref: '#/responses/errorResponse'
       tags:
       - products
+produces:
+- application/json
 responses:
   errorResponse:
     description: Generic error message returned as a string
@@ -157,4 +185,6 @@ responses:
       items:
         $ref: '#/definitions/Product'
       type: array
+schemes:
+- http
 swagger: "2.0"
